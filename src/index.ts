@@ -108,11 +108,19 @@ export const connector = async () => {
         .stdAccountCreate(
             async (context: Context, input: StdAccountCreateInput, res: Response<StdAccountCreateOutput>) => {
                 logger.info(input)
+                const groups = input.attributes.GROUPS
                 const employee = input.attributes
+                delete employee.GROUPS
 
                 let response = await client.createAccount(employee)
                 const HREF: string = response.data.HREF
                 const EMPLOYEE_ID = HREF.split('/').pop() as string
+
+                if (groups && groups.length > 0) {
+                    for (const group of groups) {
+                        response = await client.addGroupMember(group, EMPLOYEE_ID)
+                    }
+                }
 
                 response = await client.getAccount(EMPLOYEE_ID)
 
