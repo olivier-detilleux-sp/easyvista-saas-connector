@@ -1,0 +1,334 @@
+{
+    "name": "EasyVista",
+    "commands": [
+        "std:test-connection",
+        "std:account:list",
+        "std:account:read",
+        "std:entitlement:list",
+        "std:entitlement:read",
+        "std:account:update",
+        "std:account:create",
+        "std:account:enable",
+        "std:account:disable"
+    ],
+    "sourceConfig": [
+        {
+            "type": "menu",
+            "label": "Configuration",
+            "items": [
+                {
+                    "type": "section",
+                    "sectionTitle": "EasyVista connection details",
+                    "sectionHelpMessage": "Add your connection details here",
+                    "items": [
+                        {
+                            "key": "url",
+                            "label": "EasyVista URL (including Service Manager account)",
+                            "type": "url",
+                            "required": true
+                        },
+                        {
+                            "key": "auth",
+                            "label": "Authentication mode",
+                            "type": "radio",
+                            "required": true,
+                            "options": [
+                                {
+                                    "label": "Basic Authentication",
+                                    "value": "auth.basic"
+                                },
+                                {
+                                    "label": "Bearer token",
+                                    "value": "auth.token"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "token.value",
+                            "label": "Bearer token",
+                            "type": "text",
+                            "parentKey": "auth",
+                            "parentValue": "auth.token",
+                            "required": true
+                        },
+                        {
+                            "key": "basic.username",
+                            "label": "User name",
+                            "type": "text",
+                            "parentKey": "auth",
+                            "parentValue": "auth.basic",
+                            "required": true
+                        },
+                        {
+                            "key": "basic.password",
+                            "label": "Password",
+                            "type": "secret",
+                            "parentKey": "auth",
+                            "parentValue": "auth.basic",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "sectionTitle": "Configuration details",
+                    "sectionHelpMessage": "Add your configuration details here",
+                    "items": [
+                        {
+                            "key": "language",
+                            "label": "Language",
+                            "type": "radio",
+                            "required": true,
+                            "options": [
+                                {
+                                    "label": "English",
+                                    "value": "EN"
+                                },
+                                {
+                                    "label": "French",
+                                    "value": "FR"
+                                },
+                                {
+                                    "label": "German",
+                                    "value": "GE"
+                                },
+                                {
+                                    "label": "Italian",
+                                    "value": "IT"
+                                },
+                                {
+                                    "label": "Polish",
+                                    "value": "PO"
+                                },
+                                {
+                                    "label": "Spanish",
+                                    "value": "SP"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "accountSchema": {
+        "displayAttribute": "LAST_NAME",
+        "identityAttribute": "EMPLOYEE_ID",
+        "groupAttribute": "GROUPS",
+        "attributes": [
+            {
+                "name": "EMPLOYEE_ID",
+                "type": "string",
+                "description": "EMPLOYEE_ID"
+            },
+            {
+                "name": "LAST_NAME",
+                "type": "string",
+                "description": "This is actually the display name. There is no field for firstname or lastname."
+            },
+            {
+                "name": "HREF",
+                "type": "string",
+                "description": "Link to the object. It contains the uniqueId of the account."
+            },
+            {
+                "name": "E_MAIL",
+                "type": "string",
+                "description": "E_MAIL"
+            },
+            {
+                "name": "CELLULAR_NUMBER",
+                "type": "string",
+                "description": "CELLULAR_NUMBER"
+            },
+            {
+                "name": "PHONE_NUMBER",
+                "type": "string",
+                "description": "PHONE_NUMBER"
+            },
+            {
+                "name": "IDENTIFICATION",
+                "type": "string",
+                "description": "IDENTIFICATION"
+            },
+            {
+                "name": "LOGIN",
+                "type": "string",
+                "description": "LOGIN"
+            },
+            {
+                "name": "MANAGER_ID",
+                "type": "string",
+                "description": "MANAGER_ID"
+            },
+            {
+                "name": "BEGIN_OF_CONTRACT",
+                "type": "string",
+                "description": "BEGIN_OF_CONTRACT"
+            },
+            {
+                "name": "END_OF_CONTRACT",
+                "type": "string",
+                "description": "This has to be used to disable / enable an account."
+            },
+            {
+                "name": "PROFIL_ID",
+                "type": "string",
+                "managed": true,
+                "entitlement": true,
+                "description": "This is the permission level in EasyVista. It is simply managed by setting a int in the account attribute."
+            },
+            {
+                "name": "LOCATION_CODE",
+                "type": "string",
+                "description": "LOCATION_CODE"
+            },
+            {
+                "name": "LOCATION_FR",
+                "type": "string",
+                "description": "LOCATION_FR"
+            },
+            {
+                "name": "LOCATION_ID",
+                "type": "string",
+                "description": "LOCATION_ID"
+            },
+            {
+                "name": "LOCATION_PATH",
+                "type": "string",
+                "description": "LOCATION_PATH"
+            },
+            {
+                "name": "CITY",
+                "type": "string",
+                "description": "CITY"
+            },
+            {
+                "name": "DEPARTMENT_CODE",
+                "type": "string",
+                "description": "DEPARTMENT_CODE"
+            },
+            {
+                "name": "DEPARTMENT_FR",
+                "type": "string",
+                "description": "DEPARTMENT_FR"
+            },
+            {
+                "name": "DEPARTMENT_PATH",
+                "type": "string",
+                "description": "DEPARTMENT_PATH"
+            },
+            {
+                "name": "DEPARTMENT_ID",
+                "type": "string",
+                "description": "DEPARTMENT_ID"
+            },
+            {
+                "name": "DEPARTMENT_LABEL",
+                "type": "string",
+                "description": "DEPARTMENT_LABEL"
+            },
+            {
+                "name": "GROUPS",
+                "type": "string",
+                "description": "GROUPS",
+                "entitlement": true,
+                "multi": true
+            }
+        ]
+    },
+    "entitlementSchemas": [
+        {
+            "type": "group",
+            "displayAttribute": "NAME",
+            "identityAttribute": "ID",
+            "attributes": [
+                {
+                    "name": "ID",
+                    "type": "string",
+                    "description": "ID"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "description": "Name"
+                },
+                {
+                    "name": "HREF",
+                    "type": "string",
+                    "description": "HREF"
+                }
+            ]
+        }
+    ],
+    "accountCreateTemplate": {
+        "fields": [
+            {
+                "key": "LAST_NAME",
+                "label": "LAST_NAME",
+                "type": "string",
+                "required": true
+            },
+            {
+                "key": "IDENTIFICATION",
+                "label": "IDENTIFICATION",
+                "type": "string",
+                "required": true
+            },
+            {
+                "key": "LOGIN",
+                "label": "LOGIN",
+                "type": "string",
+                "required": true
+            },
+            {
+                "key": "E_MAIL",
+                "label": "E_MAIL",
+                "type": "string",
+                "required": true
+            },
+            {
+                "key": "PHONE_NUMBER",
+                "label": "PHONE_NUMBER",
+                "type": "string",
+                "required": false
+            },
+            {
+                "key": "MANAGER_ID",
+                "label": "MANAGER_ID",
+                "type": "string",
+                "required": false
+            },
+            {
+                "key": "BEGIN_OF_CONTRACT",
+                "label": "BEGIN_OF_CONTRACT",
+                "type": "string",
+                "required": false
+            },
+            {
+                "key": "END_OF_CONTRACT",
+                "label": "END_OF_CONTRACT",
+                "type": "string",
+                "required": false
+            },
+            {
+                "key": "PROFIL_ID",
+                "label": "PROFIL_ID",
+                "type": "string",
+                "required": false
+            },
+            {
+                "key": "LOCATION_ID",
+                "label": "LOCATION_ID",
+                "type": "string",
+                "required": false
+            },
+            {
+                "key": "DEPARTMENT_ID",
+                "label": "DEPARTMENT_ID",
+                "type": "string",
+                "required": false
+            }
+        ]
+    }
+}
