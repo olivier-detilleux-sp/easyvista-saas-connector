@@ -46,7 +46,7 @@
                         {
                             "key": "token.value",
                             "label": "Bearer token",
-                            "type": "text",
+                            "type": "secret",
                             "parentKey": "auth",
                             "parentValue": "auth.token",
                             "required": true
@@ -267,67 +267,133 @@
                 "key": "LAST_NAME",
                 "label": "LAST_NAME",
                 "type": "string",
-                "required": true
+                "required": true,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "lastname"
+                    }
+                }
             },
             {
                 "key": "IDENTIFICATION",
                 "label": "IDENTIFICATION",
                 "type": "string",
-                "required": true
+                "required": true,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "uid"
+                    }
+                }
             },
             {
                 "key": "LOGIN",
                 "label": "LOGIN",
                 "type": "string",
-                "required": true
+                "required": true,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "uid"
+                    }
+                }
             },
             {
                 "key": "E_MAIL",
                 "label": "E_MAIL",
                 "type": "string",
-                "required": true
+                "required": true,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "email"
+                    }
+                }
             },
             {
                 "key": "PHONE_NUMBER",
                 "label": "PHONE_NUMBER",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "workPhone"
+                    }
+                }
             },
             {
                 "key": "MANAGER_ID",
                 "label": "MANAGER_ID",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "static",
+                    "attributes": {
+                        "value": ""
+                    }
+                }
             },
             {
                 "key": "BEGIN_OF_CONTRACT",
                 "label": "BEGIN_OF_CONTRACT",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "startDate"
+                    }
+                }
             },
             {
                 "key": "END_OF_CONTRACT",
                 "label": "END_OF_CONTRACT",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "identityAttribute",
+                    "attributes": {
+                        "name": "endDate"
+                    }
+                }
             },
             {
                 "key": "PROFIL_ID",
                 "label": "PROFIL_ID",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "static",
+                    "attributes": {
+                        "value": ""
+                    }
+                }
             },
             {
                 "key": "LOCATION_ID",
                 "label": "LOCATION_ID",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "static",
+                    "attributes": {
+                        "value": ""
+                    }
+                }
             },
             {
                 "key": "DEPARTMENT_ID",
                 "label": "DEPARTMENT_ID",
                 "type": "string",
-                "required": false
+                "required": false,
+                "initialValue": {
+                    "type": "static",
+                    "attributes": {
+                        "value": ""
+                    }
+                }
             }
         ]
     }
