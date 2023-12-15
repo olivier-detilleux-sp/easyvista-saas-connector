@@ -105,6 +105,12 @@
                                     "value": "SP"
                                 }
                             ]
+                        },
+                        {
+                            "key": "search",
+                            "label": "Search filter",
+                            "type": "text",
+                            "required": false
                         }
                     ]
                 }

@@ -27,6 +27,7 @@ const ACCOUNT_ATTRIBUTES = [
 
 export class EasyVistaClient {
     private client: AxiosInstance
+    private search: string
 
     constructor(config: any) {
         const baseConfig: AxiosRequestConfig = {
@@ -43,6 +44,7 @@ export class EasyVistaClient {
             }
         }
         this.client = axios.create(baseConfig)
+        this.search = config.search
     }
 
     async testConnection(): Promise<AxiosResponse> {
@@ -61,6 +63,7 @@ export class EasyVistaClient {
     async listEmployees(max_rows?: number): Promise<AxiosResponse> {
         const url = `/employees`
         const fields = ACCOUNT_ATTRIBUTES.join(',')
+        const search = this.search
 
         if (!max_rows) {
             const response = await this.listEmployees(1)
@@ -72,6 +75,7 @@ export class EasyVistaClient {
             params: {
                 max_rows,
                 fields,
+                search,
             },
         }
 
