@@ -48,6 +48,11 @@ const OUTPUT_DATE_FORMAT = 'yyyy-MM-dd'
 //     return employee
 // }
 
+const urlToID = (url: string): string => {
+    const id = url.split('/').pop()
+    return id ? id : ''
+}
+
 // Connector must be exported as module property named connector
 export const connector = async () => {
     // Get connector source config
@@ -59,7 +64,7 @@ export const connector = async () => {
     const buildAccount = async (rawAccount: any): Promise<Account> => {
         const account = new Account(rawAccount)
         const response = await client.getGroupMembership(account.identity)
-        account.attributes.GROUPS = response.data.groups
+        account.attributes.GROUPS = response.data.groups.map((x: string) => urlToID(x))
         if (account.attributes.BEGIN_OF_CONTRACT !== '') {
             const date = parse(account.attributes.BEGIN_OF_CONTRACT as string, OUTPUT_DATE_FORMAT, Date.now())
             const dateString = format(date, INPUT_DATE_FORMAT)
@@ -108,13 +113,13 @@ export const connector = async () => {
         .stdAccountCreate(
             async (context: Context, input: StdAccountCreateInput, res: Response<StdAccountCreateOutput>) => {
                 logger.info(input)
-                const groups = input.attributes.GROUPS
+                const groups = [].concat(input.attributes.GROUPS)
                 const employee = input.attributes
                 delete employee.GROUPS
 
                 let response = await client.createAccount(employee)
                 const HREF: string = response.data.HREF
-                const EMPLOYEE_ID = HREF.split('/').pop() as string
+                const EMPLOYEE_ID = urlToID(HREF)
 
                 if (groups && groups.length > 0) {
                     for (const group of groups) {
