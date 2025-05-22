@@ -24,6 +24,7 @@ import {
     StdEntitlementReadInput,
     StdEntitlementReadOutput,
     AttributeChangeOp,
+    StdTestConnectionInput,
 } from '@sailpoint/connector-sdk'
 import { EasyVistaClient } from './easyvista'
 import { Account } from './model/account'
@@ -83,11 +84,13 @@ export const connector = async () => {
     }
 
     return createConnector()
-        .stdTestConnection(async (context: Context, input: undefined, res: Response<StdTestConnectionOutput>) => {
-            logger.info('Running test connection')
-            const response = await client.testConnection()
-            res.send({})
-        })
+        .stdTestConnection(
+            async (context: Context, input: StdTestConnectionInput, res: Response<StdTestConnectionOutput>) => {
+                logger.info('Running test connection')
+                const response = await client.testConnection()
+                res.send({})
+            }
+        )
         .stdAccountList(async (context: Context, input: StdAccountListInput, res: Response<StdAccountListOutput>) => {
             const response = await client.listEmployees()
 
